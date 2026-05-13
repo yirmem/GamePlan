@@ -66,6 +66,8 @@ func main() {
 	app.Window.NewWithOptions(application.WebviewWindowOptions{
 		Title:          "GamePlan",
 		BackgroundType: application.BackgroundTypeTransparent,
+		Width:          1200,
+		Height:         768,
 		// ⭐ 2. 背景颜色 Alpha 通道设置为 0 (完全透明)
 		BackgroundColour: application.NewRGBA(0, 0, 0, 0),
 		Mac: application.MacWindow{

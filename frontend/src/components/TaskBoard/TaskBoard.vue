@@ -11,6 +11,7 @@
       @share="handleShare"
       @import="handleImport"
       @mini="handleMini"
+      @check="handleCheck"
       :isMini="props.isMini"
     />
 
@@ -83,10 +84,16 @@ Events.On('task_reset', () => {
   getData()
 })
 
-const getData = () => {
-  TaskService.GetTaskList({
+const getData = (status) => {
+
+  let param = {
     gameId:props.selectedGameId
-  }).then((res)=>{
+  }
+  if(status !== undefined){
+    param['status'] = status
+  }
+
+  TaskService.GetTaskList(param).then((res)=>{
     taskList.splice(0, taskList.length, ...res[0])
   })
 }
@@ -248,6 +255,17 @@ const emit = defineEmits([
 
 function handleMini() {
   emit('mini',null)
+}
+
+const finish = ref(false)
+
+function handleCheck() {
+  finish.value = !finish.value
+  if(!finish.value){
+    getData()
+  }else{
+    getData(-1)
+  }
 }
 </script>
 

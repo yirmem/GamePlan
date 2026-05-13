@@ -31,6 +31,13 @@
 
     <div class="toolbar-right">
       <!-- 工具按钮 -->
+      <button v-if="!props.isMini" class="tool-btn" title="筛选未完成任务" @click="$emit('check')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+          <rect x="4" y="4" width="16" height="16" rx="3"></rect>
+          <!-- 勾选标记 -->
+          <polyline points="9 12 11 14 15 9"></polyline>
+        </svg>
+      </button>
       <button v-if="!props.isMini" class="tool-btn" title="添加任务" @click="$emit('add-task')">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
           <line x1="12" y1="5" x2="12" y2="19" />
@@ -86,7 +93,8 @@ const emit = defineEmits([
   'add-task',
   'share',
   'import',
-  'mini'
+  'mini',
+  'check',
 ])
 
 const filterTabs = [
