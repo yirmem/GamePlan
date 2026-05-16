@@ -6,16 +6,16 @@
       <span class="game-badge" v-if="!props.isMini">{{ gameName }}</span>
     </div>
 
-    <div class="card-meta" v-if="!isMini">
-      <div class="meta-item">
+    <div class="card-meta" >
+      <div class="meta-item" >
         <span class="meta-label">周期</span>
         <span class="meta-value">{{ periodText }}</span>
       </div>
-      <div class="meta-item">
+      <div class="meta-item" v-if="!isMini">
         <span class="meta-label">类型</span>
         <span class="meta-value">{{ task.isRepeat ? '重复' : '单次' }}</span>
       </div>
-      <div class="meta-item">
+      <div class="meta-item" v-if="!isMini">
         <span class="meta-label">开始</span>
         <span class="meta-value">{{ task.startDate }}</span>
       </div>
@@ -100,9 +100,10 @@ const taskCardStyle=ref({
 const changeTaskCardStyle = () => {
   if(props.isMini){
     taskCardStyle.value = {
-      border: "0px solid #eef0eb",
+      border: "1px solid #eef0eb",
       borderRadius: "12px",
-      padding: "0 12px 0",
+      padding: "2px 12px 2px",
+      gap:"0px"
     }
   }else{
     taskCardStyle.value = {

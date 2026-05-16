@@ -30,6 +30,14 @@
     </div>
 
     <div class="toolbar-right">
+      <!-- <n-popselect v-model:value="selectedToolValue" size="small" :options="[
+        {label:'表格模式',value:'tableMode'},
+      ]">
+        <button class="tool-btn" @click="$emit('tableMode')">
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="square" stroke-miterlimit="10" stroke-width="48" d="M112 268l144 144l144-144"></path><path fill="none" stroke="currentColor" stroke-linecap="square" stroke-miterlimit="10" stroke-width="48" d="M256 392V100"></path></svg>
+        </button>
+      </n-popselect> -->
+      
       <!-- 工具按钮 -->
       <button v-if="!props.isMini" class="tool-btn" title="筛选未完成任务" @click="$emit('check')">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
@@ -60,8 +68,8 @@
           <line x1="12" y1="3" x2="12" y2="15" />
         </svg>
       </button>
-      <span v-if="props.isMini" style="margin-right: 30px;">未完成任务</span>
-      <button class="tool-btn" @click="$emit('mini')" title="迷你模式">
+      <span v-if="props.isMini" >未完成任务</span>
+      <button class="tool-btn" @click="miniModeChange" title="迷你模式" :style="style.miniBtnNormalModeStyle">
         <!-- 使用 SVG 画一个经典的最小化图标（一条横线） -->
         <svg
           width="16"
@@ -78,7 +86,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, reactive } from 'vue'
 import { TaskService } from '../../../bindings/gameplan/game'
 
 const props = defineProps({
@@ -86,6 +94,24 @@ const props = defineProps({
   customDays: [Number, null],
   isMini: [Boolean, false],
 })
+
+const style = reactive({
+  miniBtnNormalModeStyle:{
+  },
+})
+
+const miniModeChange = () => {
+    if(!props.isMini){
+      style.miniBtnNormalModeStyle={
+      position:"absolute",
+      right:"10px",
+    }}else{
+      style.miniBtnNormalModeStyle={}
+    }
+    emit('mini')
+}
+
+const selectedToolValue = ref(null)
 
 const emit = defineEmits([
   'update:activeFilter',

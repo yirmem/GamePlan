@@ -69,7 +69,7 @@
 </template>
 
 <script setup>
-import { ref, reactive, computed, onMounted,watch } from 'vue'
+import { ref, reactive, computed, onMounted,watch, render } from 'vue'
 import TaskToolbar from './TaskToolbar.vue'
 import TaskCard from './TaskCard.vue'
 import TaskEditModal from './TaskEditModal.vue'
@@ -282,13 +282,13 @@ function handleCheck() {
 .task-list {
   flex: 1;
   overflow-y: auto;
-  padding: 16px 20px 20px;
+  padding: 6px 20px 20px;
 }
 
 .card-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 14px;
+  gap: 4px;
 }
 
 /* 列表进出动画 */
