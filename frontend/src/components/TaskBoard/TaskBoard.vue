@@ -91,6 +91,8 @@ const getData = (status) => {
   }
   if(status !== undefined){
     param['status'] = status
+  }else if(finish.value){
+    param['status'] = -1
   }
 
   TaskService.GetTaskList(param).then((res)=>{
